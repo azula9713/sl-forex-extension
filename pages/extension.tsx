@@ -1,4 +1,3 @@
-import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 import CurrencyPicker from "@/components/currencyPicker";
 import BankDetails from "@/components/bankDetails";
@@ -26,21 +25,10 @@ export default function Extension() {
 
   const currencies = ["USD", "EUR", "GBP", "AUD"];
 
-  async function fetchData(currency: string, date: string, isLoading = false) {
-    setIsLoaded(isLoading);
-    const response = await fetch(
-      `/api/exrates?currency=${currency}&date=${date}&latest=true`
-    );
-
-    const data = await response.json();
-
-    return data.data;
-  }
-
   useEffect(() => {
     const fetchCurrencyData = async (currency: string, date: string) => {
       const response = await fetch(
-        `/api/exrates?currency=${currency}&date=${date}&latest=true`
+        `https://cron.numbers.lk/api/exrates?currency=${currency}&date=${date}&latest=true`
       );
       const data = await response.json();
 
@@ -71,7 +59,7 @@ export default function Extension() {
 
   if (!isLoaded) {
     return (
-      <div className="w-max my-2 mx-auto p-4 bg-slate-700 rounded-lg text-white font-semibold">
+      <div className="w-max mx-auto p-4 bg-slate-700 rounded-lg text-white font-semibold">
         <CurrencyPicker
           currencies={currencies}
           selectedCurrency={currency}
@@ -94,7 +82,7 @@ export default function Extension() {
   }
 
   return (
-    <div className="w-max my-2 mx-auto p-4 bg-slate-700 rounded-lg text-white font-semibold">
+    <div className="w-max mx-auto p-4 bg-slate-700 rounded-lg text-white font-semibold">
       <CurrencyPicker
         currencies={currencies}
         selectedCurrency={currency}

@@ -5,11 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "dev:extension": "npm-watch",
-    "build": "next build",
+    "lint:build": "mv out/_next out/assets && gsed -i 's/\\/_next/\\/assets/g' out/**.html",
+    "build": "next build && next export && npm run lint:build",
     "start": "next start",
     "lint": "next lint",
     "build:extension": "next build && next export && npm run lint:build",
-    "lint:build": "mv out/_next out/assets && sed -i 's/\\/_next/\\/assets/g' out/**.html",
     "package": "npm run build:extension && zip -r packages/$(date -u +\"%Y-%m-%dT%H:%M:%SZ\").zip out"
   },
   "dependencies": {
@@ -28,5 +28,26 @@
   "devDependencies": {
     "node-watch": "^0.7.3",
     "sed": "^0.0.2"
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "styles/**",
+        "pages/**",
+        "public/**",
+        "helpers/**",
+        "next.config.js"
+      ],
+      "ignore": [
+        "out",
+        "node_modules",
+        ".next",
+        ".vscode"
+      ],
+      "extensions": [
+        "js",
+        "json"
+      ]
+    }
   }
 }
