@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Sl Forex Extension",
+  "short_name": "slforexextension",
+  "version": "0.1.2",
+  "description": "Get the latest exchange rates from banks of Sri Lanka",
+  "icons": {
+    "16": "/favicon.ico",
+    "32": "/favicon.ico",
+    "48": "/favicon.ico",
+    "128": "/favicon.ico",
+    "192": "/favicon.ico"
+  },
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["inject.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "extension.html"
+  }
+}
